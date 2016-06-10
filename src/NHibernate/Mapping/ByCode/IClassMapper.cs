@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using NHibernate.Cfg.MappingSchema;
 
 namespace NHibernate.Mapping.ByCode
 {
@@ -12,6 +13,7 @@ namespace NHibernate.Mapping.ByCode
 		void ComponentAsId(MemberInfo idProperty, Action<IComponentAsIdMapper> idMapper);
 		void ComposedId(Action<IComposedIdMapper> idPropertiesMapping);
 
+		void Abstract(bool isAbstract);
 		void Discriminator(Action<IDiscriminatorMapper> discriminatorMapping);
 		void DiscriminatorValue(object value);
 		void Table(string tableName);
@@ -25,6 +27,8 @@ namespace NHibernate.Mapping.ByCode
 		void Filter(string filterName, Action<IFilterMapper> filterMapping);
 		void Where(string whereClause);
 		void SchemaAction(SchemaAction action);
+		void Polymorphism(PolymorphismType type);
+		void OptimisticLock(OptimisticLockMode mode);
 	}
 
 	public interface IClassMapper : IClassAttributesMapper, IPropertyContainerMapper
@@ -50,6 +54,7 @@ namespace NHibernate.Mapping.ByCode
 
 		void ComposedId(Action<IComposedIdMapper<TEntity>> idPropertiesMapping);
 
+		void Abstract(bool isAbstract);
 		void Discriminator(Action<IDiscriminatorMapper> discriminatorMapping);
 		void DiscriminatorValue(object value);
 		void Table(string tableName);
@@ -64,6 +69,8 @@ namespace NHibernate.Mapping.ByCode
 		void Filter(string filterName, Action<IFilterMapper> filterMapping);
 		void Where(string whereClause);
 		void SchemaAction(SchemaAction action);
+		void Polymorphism(PolymorphismType type);
+		void OptimisticLock(OptimisticLockMode mode);
 	}
 
 	public interface IClassMapper<TEntity> : IClassAttributesMapper<TEntity>, IPropertyContainerMapper<TEntity> where TEntity : class
